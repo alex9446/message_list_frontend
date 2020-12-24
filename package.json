@@ -1,0 +1,12 @@
+{
+  "name": "message_list",
+  "private": "true",
+  "scripts": {
+  },
+  "author": "Alessio Margelli <alex9446@gmail.com>",
+  "license": "AGPL-3.0",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

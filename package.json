@@ -1,12 +1,21 @@
 {
   "name": "message_list",
-  "private": "true",
+  "private": true,
   "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
   },
   "author": "Alessio Margelli <alex9446@gmail.com>",
   "license": "AGPL-3.0",
   "dependencies": {
+    "gatsby": "^2.29.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
+    "eslint": "^7.16.0"
   }
 }

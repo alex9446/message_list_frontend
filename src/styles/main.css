@@ -1,0 +1,32 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  margin: auto;
+}
+
+p {
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+#not-found {
+  text-align: center;
+}
+
+.message {
+  border: 1px solid black;
+  border-radius: 0.4em;
+  margin: 1em;
+  padding: 0.8em;
+}
+
+.add {
+  border-color: darkgreen;
+}
+.add > p {
+  color: darkgreen;
+}
+
+.button {
+  cursor: pointer;
+}

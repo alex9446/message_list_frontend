@@ -1,5 +1,13 @@
 import React from 'react';
 
+import MessageArea from '../components/message-area';
+import Title from '../components/title';
+
 export default function Index() {
-    return <h1>Hello world!</h1>;
+  return (
+    <div id="index-page">
+      <Title />
+      <MessageArea />
+    </div>
+  );
 }

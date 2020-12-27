@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 
-import ButtonMessage from './button-message';
+import InputArea from './input-area';
 import MessageRows from './message-rows';
 
 export default function MessageArea() {
-  const [messages, setMessages] = useState(['a', 'b', 'c']);
+  const example_message = [
+    { key: 0, text: 'a' },
+    { key: 1, text: 'b' }
+  ]
 
-  function handleAdd() {
-    setMessages(messages.slice().concat('d'));
+  const [messages, setMessages] = useState(example_message);
+
+  function handleAdd(text) {
+    setMessages(messages.slice().concat({
+      key: messages.slice().pop().key + 1,
+      text: text
+    }));
   }
 
   return (
     <div id="message-area">
       <MessageRows>{messages}</MessageRows>
-      <ButtonMessage
-        class="add"
-        text="Add message"
-        onClick={handleAdd}
-      />
+      <InputArea onSubmit={handleAdd} />
     </div>
   );
 }

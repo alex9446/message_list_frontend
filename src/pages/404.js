@@ -5,7 +5,7 @@ import Title from '../components/title';
 
 export default function NotFound() {
   return (
-    <div id="not-found">
+    <div id="not-found-page">
       <Title>404</Title>
       <h1>Page not found!</h1>
       <Link to="/">

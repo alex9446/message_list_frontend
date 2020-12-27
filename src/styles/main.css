@@ -9,7 +9,12 @@ p {
   padding: 0;
 }
 
-#not-found {
+#index-page {
+  margin: auto;
+  max-width: 700px;
+}
+
+#not-found-page {
   text-align: center;
 }
 
@@ -29,4 +34,9 @@ p {
 
 .button {
   cursor: pointer;
+}
+
+.input > input {
+  box-sizing: border-box;
+  width: 100%;
 }

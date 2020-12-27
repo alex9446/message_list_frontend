@@ -25,10 +25,15 @@ p {
   padding: 0.8em;
 }
 
-.add {
+.message.add {
   border-color: darkgreen;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.add > p {
+
+.message.add > p,
+.message.add > svg {
   color: darkgreen;
 }
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import InputBox from './input-box';
+import InputButton from './input-button';
 
 export default function InputArea(props) {
   const [showInput, setShowInput] = useState(false);
@@ -16,15 +18,7 @@ export default function InputArea(props) {
   return (
     <>
       {showInput && <InputBox onSubmit={handleSubmit} />}
-      <div
-        className="add button message"
-        role="button"
-        tabIndex="0"
-        onClick={handleShowInput}
-        onKeyPress={handleShowInput}
-      >
-        <p>Add message</p>
-      </div>
+      <InputButton onClick={handleShowInput} />
     </>
   );
 }

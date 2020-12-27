@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import InputArea from './input-area';
+import InputArea from './input-area/input-area';
 import MessageRows from './message-rows';
 
 export default function MessageArea() {

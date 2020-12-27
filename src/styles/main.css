@@ -19,17 +19,28 @@ p {
 }
 
 .message {
+  display: flex;
+  align-items: center;
   border: 1px solid black;
   border-radius: 0.4em;
   margin: 1em;
   padding: 0.8em;
 }
 
+.message > p {
+  flex-grow: 1;
+}
+
+.message > svg {
+  margin-left: 0.5em;
+}
+
+.message > svg.eraser {
+  color: red;
+}
+
 .message.add {
   border-color: darkgreen;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .message.add > p,

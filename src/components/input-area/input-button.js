@@ -1,4 +1,4 @@
-import { mdiPlus, mdiPlusOutline } from '@mdi/js';
+import { mdiPlusBox } from '@mdi/js';
 import Icon from '@mdi/react';
 import React from 'react';
 
@@ -12,7 +12,7 @@ export default function InputButton(props) {
       onKeyPress={props.onClick}
     >
       <p>Add message</p>
-      <Icon path={mdiPlusOutline} size={1} />
+      <Icon path={mdiPlusBox} size={1} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function InputBox(props) {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(props.text || '');
 
   function handleChange(event) {
     setText(event.target.value);

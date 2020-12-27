@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import InputArea from './input-area/input-area';
 import MessageRows from './message-rows';
-import nextKey from '../utils/next-key';
+import nextKey from '../../utils/next-key';
 
 export default function MessageArea() {
   const example_message = [

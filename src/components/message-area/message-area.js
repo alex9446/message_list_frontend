@@ -5,12 +5,7 @@ import MessageRows from './message-rows';
 import nextKey from '../../utils/next-key';
 
 export default function MessageArea() {
-  const example_message = [
-    { key: 0, text: 'a' },
-    { key: 1, text: 'b' }
-  ]
-
-  const [messages, setMessages] = useState(example_message);
+  const [messages, setMessages] = useState([]);
 
   function handleAdd(text) {
     setMessages(messages.slice().concat({

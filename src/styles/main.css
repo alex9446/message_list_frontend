@@ -9,6 +9,15 @@ p {
   padding: 0;
 }
 
+#error-box {
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+  padding: 0.5em;
+  border: 1px solid red;
+  border-radius: 0.4em;
+}
+
 #index-page {
   margin: auto;
   max-width: 700px;

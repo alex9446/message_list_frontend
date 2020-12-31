@@ -6,7 +6,7 @@ import nextKey from '../utils/next-key';
 import Title from '../components/title';
 
 export default function Index() {
-  const [errors, setErrors] = useState(['a','b']);
+  const [errors, setErrors] = useState([]);
 
   function handleAddError(text) {
     setErrors(errors.slice().concat({
@@ -18,7 +18,7 @@ export default function Index() {
 
   function handleHideError(key) {
     setErrors(errors.map(error => {
-      if (error.key === error) {
+      if (error.key === key) {
         error.visible = false;
       }
       return error;
@@ -28,11 +28,10 @@ export default function Index() {
   return (
     <div id="index-page">
       <Title />
-      <MessageArea />
-      <ErrorBox
-        onAddError={handleAddError}
-        onHideError={handleHideError}
-      >{errors}</ErrorBox>
+      <MessageArea onAddError={handleAddError} />
+      <ErrorBox onHideError={handleHideError} >
+        {errors}
+      </ErrorBox>
     </div>
   );
 }

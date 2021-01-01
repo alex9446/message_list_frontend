@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ErrorBox from '../components/toast-area/error-box';
 import MessageArea from '../components/message-area/message-area';
 import nextKey from '../utils/next-key';
-import Title from '../components/title';
+import Head from '../components/head';
 
 export default function Index() {
   const [errors, setErrors] = useState([]);
@@ -27,7 +27,7 @@ export default function Index() {
 
   return (
     <div id="index-page">
-      <Title />
+      <Head />
       <MessageArea onAddError={handleAddError} />
       <ErrorBox onHideError={handleHideError} >
         {errors}

@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import InputArea from './input-area/input-area';
+import { fetch_last_action, fetch_messages } from '../../utils/api-connector';
 import MessageRows from './message-rows';
 import nextKey from '../../utils/next-key';
 
-export default function MessageArea() {
+export default function MessageArea(props) {
+  const [lastAction, setLastAction] = useState('');
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => fetch_last_action(setLastAction), 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => fetch_messages(setMessages), [lastAction]);
 
   function handleAdd(text) {
     setMessages(messages.slice().concat({

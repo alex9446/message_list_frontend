@@ -8,6 +8,8 @@ export default function Head(props) {
       <title>
         {props.title ? props.title + ' - ' : ''}Message List
       </title>
+      <meta name="description" content="A simple client service for saving and managing messages.
+                                        It connect to the server service with REST API." />
     </Helmet>
   );
 }

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
 import ErrorBox from '../components/toast-area/error-box';
+import Head from '../components/head';
 import MessageArea from '../components/message-area/message-area';
 import nextKey from '../utils/next-key';
-import Head from '../components/head';
+import ThemeMode from '../components/theme-mode';
 
 export default function Index() {
+  const [darkMode, setDarkMode] = useState(false);
   const [errors, setErrors] = useState([]);
 
   function handleAddError(text) {
@@ -25,10 +27,15 @@ export default function Index() {
     }));
   }
 
+  function handleToggleMode() {
+    setDarkMode(!darkMode);
+  }
+
   return (
     <div id="index-page">
       <Head />
       <MessageArea onAddError={handleAddError} />
+      <ThemeMode darkMode={darkMode} onToggleMode={handleToggleMode} />
       <ErrorBox onHideError={handleHideError} >
         {errors}
       </ErrorBox>

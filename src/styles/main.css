@@ -1,16 +1,32 @@
 body {
+  background-color: var(--theme-mode-bg-color);
   font-family: 'Courier New', Courier, monospace;
   margin: auto;
+  transition: all 0.3s linear;
+}
+
+body.light-mode {
+  --theme-mode-bg-color: white;
+  --theme-mode-button-bg-color: black;
+  --theme-mode-color: black;
+  --theme-mode-color-green: darkgreen;
+}
+
+body.dark-mode {
+  --theme-mode-bg-color: #0d1117;
+  --theme-mode-button-bg-color: #6e40c9;
+  --theme-mode-color: lightgray;
+  --theme-mode-color-green: green;
 }
 
 p {
-  color: black;
+  color: var(--theme-mode-color);
   margin: 0;
   padding: 0;
 }
 
 #error-box {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   padding: 0.5em;
@@ -27,10 +43,23 @@ p {
   text-align: center;
 }
 
+#theme-mode {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: var(--theme-mode-bg-color);
+  display: flex;
+  align-items: center;
+  background-color: var(--theme-mode-button-bg-color);
+  border-radius: 50%;
+  margin: 1em;
+  padding: 0.4em;
+}
+
 .message {
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid var(--theme-mode-color);
   border-radius: 0.4em;
   margin: 1em;
   padding: 0.8em;
@@ -42,6 +71,7 @@ p {
 }
 
 .message > svg {
+  color: var(--theme-mode-color);
   margin-left: 0.5em;
 }
 
@@ -50,12 +80,12 @@ p {
 }
 
 .message.add {
-  border-color: darkgreen;
+  border-color: var(--theme-mode-color-green);
 }
 
 .message.add > p,
 .message.add > svg {
-  color: darkgreen;
+  color: var(--theme-mode-color-green);
 }
 
 .button {

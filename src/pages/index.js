@@ -7,7 +7,6 @@ import nextKey from '../utils/next-key';
 import ThemeMode from '../components/theme-mode';
 
 export default function Index() {
-  const [darkMode, setDarkMode] = useState(false);
   const [errors, setErrors] = useState([]);
 
   function handleAddError(text) {
@@ -27,15 +26,11 @@ export default function Index() {
     }));
   }
 
-  function handleToggleMode() {
-    setDarkMode(!darkMode);
-  }
-
   return (
     <div id="index-page">
       <Head />
       <MessageArea onAddError={handleAddError} />
-      <ThemeMode darkMode={darkMode} onToggleMode={handleToggleMode} />
+      <ThemeMode />
       <ErrorBox onHideError={handleHideError} >
         {errors}
       </ErrorBox>

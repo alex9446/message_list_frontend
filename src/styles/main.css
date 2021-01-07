@@ -1,15 +1,13 @@
 body {
-  background-color: var(--theme-mode-bg-color);
-  font-family: 'Courier New', Courier, monospace;
-  margin: auto;
-  transition: all 0.3s linear;
-}
-
-body.light-mode {
   --theme-mode-bg-color: white;
   --theme-mode-button-bg-color: black;
   --theme-mode-color: black;
   --theme-mode-color-green: darkgreen;
+
+  background-color: var(--theme-mode-bg-color);
+  font-family: 'Courier New', Courier, monospace;
+  margin: auto;
+  transition: all 0.3s linear;
 }
 
 body.dark-mode {

@@ -1,20 +1,44 @@
-body {
-  --theme-mode-bg-color: white;
-  --theme-mode-button-bg-color: black;
-  --theme-mode-color: black;
-  --theme-mode-color-green: darkgreen;
+/* START: setting variables */
+:root {
+  --light-mode-bg-color: white;
+  --light-mode-button-bg-color: black;
+  --light-mode-color: black;
+  --light-mode-color-green: darkgreen;
+  --dark-mode-bg-color: #0d1117;
+  --dark-mode-button-bg-color: #6e40c9;
+  --dark-mode-color: lightgray;
+  --dark-mode-color-green: green;
+}
 
+body {  /* DEFAULT: light-mode */
+  --theme-mode-bg-color: var(--light-mode-bg-color);
+  --theme-mode-button-bg-color: var(--light-mode-button-bg-color);
+  --theme-mode-color: var(--light-mode-color);
+  --theme-mode-color-green: var(--light-mode-color-green);
+}
+
+@media (prefers-color-scheme: dark) {
+  body.no-mode {
+    --theme-mode-bg-color: var(--dark-mode-bg-color);
+    --theme-mode-button-bg-color: var(--dark-mode-button-bg-color);
+    --theme-mode-color: var(--dark-mode-color);
+    --theme-mode-color-green: var(--dark-mode-color-green);
+  }
+}
+
+body.dark-mode {
+  --theme-mode-bg-color: var(--dark-mode-bg-color);
+  --theme-mode-button-bg-color: var(--dark-mode-button-bg-color);
+  --theme-mode-color: var(--dark-mode-color);
+  --theme-mode-color-green: var(--dark-mode-color-green);
+}
+/* END: setting variables */
+
+body {
   background-color: var(--theme-mode-bg-color);
   font-family: 'Courier New', Courier, monospace;
   margin: auto;
   transition: all 0.3s linear;
-}
-
-body.dark-mode {
-  --theme-mode-bg-color: #0d1117;
-  --theme-mode-button-bg-color: #6e40c9;
-  --theme-mode-color: lightgray;
-  --theme-mode-color-green: green;
 }
 
 p {

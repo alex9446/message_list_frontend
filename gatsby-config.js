@@ -9,6 +9,7 @@ module.exports = {
         display: 'standalone',
         icon: 'src/images/favicon.svg',
         cache_busting_mode: 'none',
+        theme_color: '#ffffff',
         background_color: '#ffffff'
       }
     },

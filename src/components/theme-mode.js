@@ -24,6 +24,7 @@ export default function ThemeMode() {
       <div
         id="theme-mode"
         role="button"
+        aria-label="theme mode"
         tabIndex="0"
         onClick={handleClick}
         onKeyPress={handleClick}

@@ -7,8 +7,10 @@ export default function EventIcon(props) {
       path={props.path}
       onClick={props.onClick}
       onKeyPress={props.onClick}
+      title={props.title}
       className={props.class || ''}
       size={1}
+      role="button"
       tabIndex="0"
     />
   );

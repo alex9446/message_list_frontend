@@ -7,8 +7,18 @@ export default function MessageBox(props) {
   return (
     <div className="message">
       <p>{props.text}</p>
-      <EventIcon path={mdiPencil} class="button pencil" onClick={props.onRequestEdit} />
-      <EventIcon path={mdiEraser} class="button eraser" onClick={props.onDelete} />
+      <EventIcon
+        path={mdiPencil}
+        title="edit"
+        class="button pencil"
+        onClick={props.onRequestEdit}
+      />
+      <EventIcon
+        path={mdiEraser}
+        title="delete"
+        class="button eraser"
+        onClick={props.onDelete}
+      />
     </div>
   );
 }

@@ -5,9 +5,14 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Message List',
+        short_name: 'Message List',
         start_url: '/',
         display: 'standalone',
-        icon: 'src/images/favicon.svg',
+        include_favicon: false,
+        icon: 'src/images/favicon.png',
+        icon_options: {
+          purpose: 'any maskable'
+        },
         cache_busting_mode: 'none',
         theme_color: '#ffffff',
         background_color: '#ffffff'

@@ -1,8 +1,7 @@
 import { mdiWeatherNight, mdiWeatherSunny } from '@mdi/js';
+import Icon from '@mdi/react';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-
-import EventIcon from './event-icon';
 
 export default function ThemeMode() {
   const [darkMode, setDarkMode] = useState(null);
@@ -22,10 +21,16 @@ export default function ThemeMode() {
       <Helmet>
         <body className={getMode()} />
       </Helmet>
-      <div id="theme-mode">
-        <EventIcon
+      <div
+        id="theme-mode"
+        role="button"
+        tabIndex="0"
+        onClick={handleClick}
+        onKeyPress={handleClick}
+      >
+        <Icon
           path={darkMode ? mdiWeatherSunny : mdiWeatherNight}
-          onClick={handleClick}
+          size={1}
         />
       </div>
     </>

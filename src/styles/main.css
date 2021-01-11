@@ -65,6 +65,16 @@ p {
   text-align: center;
 }
 
+#pending-events-box {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0.5em;
+  border: 0;
+  border-radius: 0.4em;
+  background-color: #cce5ff;
+}
+
 #theme-mode {
   position: fixed;
   bottom: 0;

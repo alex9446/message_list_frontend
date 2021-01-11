@@ -4,10 +4,12 @@ import ErrorBox from '../components/toast-area/error-box';
 import Head from '../components/head';
 import MessageArea from '../components/message-area/message-area';
 import nextKey from '../utils/next-key';
+import PendingEventsBox from '../components/toast-area/pending-events-box';
 import ThemeMode from '../components/theme-mode';
 
 export default function Index() {
   const [errors, setErrors] = useState([]);
+  const [pushEvents, setPushEvents] = useState([]);
 
   function handleAddError(text) {
     setErrors(errors.slice().concat({
@@ -34,6 +36,7 @@ export default function Index() {
       <ErrorBox onHideError={handleHideError} >
         {errors}
       </ErrorBox>
+      <PendingEventsBox>{pushEvents}</PendingEventsBox>
     </div>
   );
 }

@@ -1,3 +1,7 @@
+export function getSyncTiming() {
+  return parseInt(process.env.GATSBY_SYNC_TIMING) || 5000;
+}
+
 export default function apiConnector(endpoint, method='GET', json={}) {
   return new Promise((resolve, reject) => {
     const cors_url = process.env.GATSBY_USE_CORS === 'TRUE' ? 'https://cors-anywhere.herokuapp.com/' : '';
@@ -7,7 +11,7 @@ export default function apiConnector(endpoint, method='GET', json={}) {
 
     const url = cors_url + protocol + host + endpoint;
     let options = { method: method };
-    if (method === 'POST') {
+    if (method === 'POST' || method === 'PATCH') {
       options.headers = headers;
       options.body = JSON.stringify(json);
     }
@@ -38,4 +42,33 @@ export function fetch_messages(resolve_callback) {
       return message;
     }));
   }).catch(error => handleError(error));
+}
+
+export function push_event(id, events) {
+  const event = events.find(event => event.id === id);
+  let response;
+
+  switch (event.type) {
+    case 'add':
+      response = apiConnector('/messages', 'POST', {text: event.text});
+      break;
+    case 'edit':
+      response = apiConnector(`/messages/${event.remote_id}`, 'PATCH', {text: event.text});
+      break;
+    case 'delete':
+      response = apiConnector(`/messages/${event.remote_id}`, 'DELETE');
+      break;
+    default:
+      console.error(`push event with id ${id} have a wrong type: ${event.type}`);
+      break;
+  }
+
+  if (response) {
+    response.then(() => {
+      console.debug(`PushEvent ${id} complete!`);
+    }).catch(() => {
+      handleError(`PushEvent ${id} fail!`);
+      setTimeout(() => push_event(id, events), getSyncTiming());
+    });
+  }
 }

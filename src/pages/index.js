@@ -12,8 +12,10 @@ export default function Index() {
   const [pushEvents, setPushEvents] = useState([]);
 
   function handleAddError(text) {
-    setErrors(errors.slice().concat({
-      key: nextKey(errors.slice()),
+    const prev_errors = errors.slice();
+
+    setErrors(prev_errors.concat({
+      key: nextKey(prev_errors),
       text: text,
       visible: true
     }));
@@ -28,10 +30,36 @@ export default function Index() {
     }));
   }
 
+  function handleAddPushEvents(event) {
+    const prev_pushEvents = pushEvents.slice();
+    const event_id = nextKey(prev_pushEvents);
+
+    setPushEvents(prev_pushEvents.concat({
+      id: event_id,
+      event: event,
+      complete: false
+    }));
+
+    return event_id;
+  }
+
+  function handleCompletePushEvents(event_id) {
+    setPushEvents(pushEvents.map(event => {
+      if (event.id === event_id) {
+        event.complete = true;
+      }
+      return event;
+    }));
+  }
+
   return (
     <div id="index-page">
       <Head />
-      <MessageArea onAddError={handleAddError} />
+      <MessageArea
+        onAddError={handleAddError}
+        onAddPushEvents={handleAddPushEvents}
+        onCompletePushEvents={handleCompletePushEvents}
+      />
       <ThemeMode />
       <ErrorBox onHideError={handleHideError} >
         {errors}

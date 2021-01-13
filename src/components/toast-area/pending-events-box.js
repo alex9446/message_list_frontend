@@ -1,12 +1,12 @@
 import React from 'react';
 
 export default function PendingEventsBox(props) {
-  const total_pending_events = props.children.length;
+  const pending_events = props.children.filter(event => event.complete === false);
 
-  if (total_pending_events > 1) {
+  if (pending_events.length > 0) {
     return (
       <div id="pending-events-box" className="message">
-        <p>{total_pending_events} pending events</p>
+        <p>{pending_events.length} pending events</p>
       </div>
     );
   }

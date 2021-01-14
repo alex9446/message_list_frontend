@@ -21,7 +21,8 @@ export default function MessageArea(props) {
       key: nextKey(messages.slice()),
       text: text
     }));
-    push_event(0, [{id: 0, type: 'add', text: text}]);  // TEMP
+    const event = {type: 'add', text: text};
+    push_event(() => props.onAddPushEvents(event), event, props.onAddError, props.onCompletePushEvents);
   }
 
   function handleEdit(key, text) {
@@ -36,12 +37,14 @@ export default function MessageArea(props) {
       }
       return message;
     }));
-    push_event(0, [{id: 0, remote_id: key, type: 'edit', text: text}]);  // TEMP
+    const event = {type: 'edit', remote_id: key, text: text};
+    push_event(() => props.onAddPushEvents(event), event, props.onAddError, props.onCompletePushEvents);
   }
 
   function handleDelete(key) {
     setMessages(messages.filter(message => message.key !== key));
-    push_event(0, [{id: 0, remote_id: key, type: 'delete'}]);  // TEMP
+    const event = {type: 'delete', remote_id: key};
+    push_event(() => props.onAddPushEvents(event), event, props.onAddError, props.onCompletePushEvents);
   }
 
   return (

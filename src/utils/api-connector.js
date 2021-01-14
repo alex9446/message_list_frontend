@@ -44,8 +44,7 @@ export function fetch_messages(resolve_callback) {
   }).catch(error => handleError(error));
 }
 
-export function push_event(id, events) {
-  const event = events.find(event => event.id === id);
+export function push_event(id, event, onError, onComplete) {
   let response;
 
   switch (event.type) {
@@ -65,10 +64,11 @@ export function push_event(id, events) {
 
   if (response) {
     response.then(() => {
-      console.debug(`PushEvent ${id} complete!`);
+      console.debug(`PushEvent ${id}:${event.type} complete!`);
     }).catch(() => {
-      handleError(`PushEvent ${id} fail!`);
-      setTimeout(() => push_event(id, events), getSyncTiming());
+      const retry_timing = getSyncTiming();
+      handleError(`PushEvent ${id}:${event.type} fail! Retry in ${retry_timing/1000} seconds`, onError);
+      setTimeout(() => push_event(id, event, onError, onComplete), retry_timing);
     });
   }
 }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import InputArea from './input-area/input-area';
 import { fetch_last_action, fetch_messages, getSyncTiming, push_event } from '../../utils/api-connector';
 import MessageRows from './message-rows';
-import nextKey from '../../utils/next-key';
+import { nextKey } from '../../utils/next-id-key';
 
 export default function MessageArea(props) {
   const [lastAction, setLastAction] = useState('');
@@ -17,12 +17,13 @@ export default function MessageArea(props) {
   useEffect(() => fetch_messages(setMessages), [lastAction]);
 
   function handleAdd(text) {
-    setMessages(messages.slice().concat({
-      key: nextKey(messages.slice()),
+    setMessages(messages.concat({
+      key: nextKey(messages),
       text: text
     }));
-    const event = {type: 'add', text: text};
-    push_event(() => props.onAddPushEvents(event), event, props.onAddError, props.onCompletePushEvents);
+
+    const event = {type: 'add', try: 0, data: {text: text}};
+    push_event(event, props.onAddError);
   }
 
   function handleEdit(key, text) {
@@ -37,14 +38,16 @@ export default function MessageArea(props) {
       }
       return message;
     }));
-    const event = {type: 'edit', remote_id: key, text: text};
-    push_event(() => props.onAddPushEvents(event), event, props.onAddError, props.onCompletePushEvents);
+
+    const event = {type: 'edit', try: 0, data: {remote_id: key, text: text}};
+    push_event(event, props.onAddError);
   }
 
   function handleDelete(key) {
     setMessages(messages.filter(message => message.key !== key));
-    const event = {type: 'delete', remote_id: key};
-    push_event(() => props.onAddPushEvents(event), event, props.onAddError, props.onCompletePushEvents);
+
+    const event = {type: 'delete', try: 0, data: {remote_id: key}};
+    push_event(event, props.onAddError);
   }
 
   return (

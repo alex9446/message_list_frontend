@@ -102,7 +102,8 @@ p {
   overflow: auto;
 }
 
-.message > svg {
+.message > svg,
+.message > div > svg {
   color: var(--theme-mode-color);
   margin-left: 0.5em;
 }

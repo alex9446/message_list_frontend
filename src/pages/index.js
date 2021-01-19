@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 
 import ErrorBox from '../components/toast-area/error-box';
 import Head from '../components/head';
@@ -7,23 +7,34 @@ import { nextId } from '../utils/next-id-key';
 import PendingEventsBox from '../components/toast-area/pending-events-box';
 import ThemeMode from '../components/theme-mode';
 
+function reducerErrors(state, action) {
+  switch (action.type) {
+    case 'add':
+      return state.concat({
+        id: nextId(state),
+        text: action.payload,
+        visible: true
+      });
+    case 'hide':
+      return state.map(error => {
+        if (error.id === action.payload) error.visible = false;
+        return error;
+      });
+    default:
+      throw new Error();
+  }
+}
+
 export default function Index() {
-  const [errors, setErrors] = useState([]);
+  const [errors, dispatchErrors] = useReducer(reducerErrors, []);
   const [pendingEvents, setPendingEvents] = useState([]);
 
   function handleAddError(text) {
-    setErrors(errors.concat({
-      id: nextId(errors),
-      text: text,
-      visible: true
-    }));
+    dispatchErrors({type: 'add', payload: text});
   }
 
   function handleHideError(id) {
-    setErrors(errors.map(error => {
-      if (error.id === id) { error.visible = false; }
-      return error;
-    }));
+    dispatchErrors({type: 'hide', payload: id});
   }
 
   return (

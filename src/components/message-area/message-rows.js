@@ -26,6 +26,7 @@ function getMessageRow(props, message) {
       <MessageBox
         key={message.key}
         text={message.text}
+        preview={message.preview}
         onRequestEdit={handleEdit}
         onDelete={handleDelete}
       />

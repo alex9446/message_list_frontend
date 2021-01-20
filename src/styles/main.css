@@ -121,6 +121,11 @@ p {
   color: var(--theme-mode-color-green);
 }
 
+.message.preview > svg {
+  color: lightgray;
+  cursor: not-allowed;
+}
+
 .button {
   cursor: pointer;
 }

@@ -19,7 +19,8 @@ export default function MessageArea(props) {
   function handleAdd(text) {
     setMessages(messages.concat([{
       key: nextKey(messages),
-      text: text
+      text: text,
+      preview: true
     }]));
 
     const event = {type: 'add', try: 1, data: {text: text}};

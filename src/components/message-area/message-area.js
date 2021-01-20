@@ -17,12 +17,12 @@ export default function MessageArea(props) {
   useEffect(() => fetch_messages(setMessages), [lastAction]);
 
   function handleAdd(text) {
-    setMessages(messages.concat({
+    setMessages(messages.concat([{
       key: nextKey(messages),
       text: text
-    }));
+    }]));
 
-    const event = {type: 'add', try: 0, data: {text: text}};
+    const event = {type: 'add', try: 1, data: {text: text}};
     push_event(event, props.onAddError);
   }
 
@@ -39,14 +39,16 @@ export default function MessageArea(props) {
       return message;
     }));
 
-    const event = {type: 'edit', try: 0, data: {remote_id: key, text: text}};
-    push_event(event, props.onAddError);
+    if (text !== null) {
+      const event = {type: 'edit', try: 1, data: {remote_id: key, text: text}};
+      push_event(event, props.onAddError);
+    }
   }
 
   function handleDelete(key) {
     setMessages(messages.filter(message => message.key !== key));
 
-    const event = {type: 'delete', try: 0, data: {remote_id: key}};
+    const event = {type: 'delete', try: 1, data: {remote_id: key}};
     push_event(event, props.onAddError);
   }
 

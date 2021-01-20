@@ -1,6 +1,9 @@
 export function getSyncTiming() {
   return parseInt(process.env.GATSBY_SYNC_TIMING) || 5000;
 }
+export function getRetryTiming() {
+  return parseInt(process.env.GATSBY_RETRY_TIMING) || 5000;
+}
 
 export default function apiConnector(endpoint, method='GET', json={}) {
   return new Promise((resolve, reject) => {
@@ -67,17 +70,18 @@ export function push_event(event, onError) {
     response.then(() => {
       console.debug(`Event ${event.type} complete!`);
     }).catch(() => {
-      let error_message = `Event ${event.type} fail!`
-      const retry = event.try <= 3 ? true : false;
-      const retry_timing = getSyncTiming();
+      const retry = event.try < 3 ? true : false;
+      const retry_timing = getRetryTiming();
+      const error_callback = event.try === 1 ? onError : null;
 
-      if (retry) error_message += ` Retry in ${retry_timing/1000} seconds`;
-      handleError(error_message, onError);
+      handleError(`Event ${event.type} fail! ` +
+                  `Retry in ${retry_timing/1000} seconds`,
+                  error_callback);
 
       if (retry) {
-        event.try = event.try + 1;
+        const new_event = { ...event, try: event.try+1 }
 
-        setTimeout(() => push_event(event, onError), retry_timing);
+        setTimeout(() => push_event(new_event, onError), retry_timing);
       }
     });
   }

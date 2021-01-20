@@ -10,11 +10,11 @@ import ThemeMode from '../components/theme-mode';
 function reducerErrors(state, action) {
   switch (action.type) {
     case 'add':
-      return state.concat({
+      return state.concat([{
         id: nextId(state),
         text: action.payload,
         visible: true
-      });
+      }]);
     case 'hide':
       return state.map(error => {
         if (error.id === action.payload) error.visible = false;

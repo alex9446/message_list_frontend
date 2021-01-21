@@ -49,9 +49,10 @@ p {
 
 #error-box {
   position: fixed;
-  bottom: 0;
+  bottom: 3em;
   right: 0;
   padding: 0.5em;
+  background-color: var(--theme-mode-bg-color);
   border: 1px solid red;
   border-radius: 0.4em;
 }
@@ -73,6 +74,10 @@ p {
   border: 0;
   border-radius: 0.4em;
   background-color: #cce5ff;
+}
+
+#pending-events-box > p {
+  color: var(--light-mode-color);
 }
 
 #theme-mode {

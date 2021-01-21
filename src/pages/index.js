@@ -27,14 +27,20 @@ function reducerErrors(state, action) {
 
 export default function Index() {
   const [errors, dispatchErrors] = useReducer(reducerErrors, []);
-  const [pendingEvents, setPendingEvents] = useState([]);
+  const [pendingEvents, setPendingEvents] = useState(0);
 
   function handleAddError(text) {
     dispatchErrors({type: 'add', payload: text});
   }
-
   function handleHideError(id) {
     dispatchErrors({type: 'hide', payload: id});
+  }
+
+  function handleIncrementPendingEvents() {
+    setPendingEvents(prevPendingEvents => prevPendingEvents + 1);
+  }
+  function handleDecrementPendingEvents() {
+    setPendingEvents(prevPendingEvents => prevPendingEvents - 1);
   }
 
   return (
@@ -42,6 +48,8 @@ export default function Index() {
       <Head />
       <MessageArea
         onAddError={handleAddError}
+        onIncrementPendingEvents={handleIncrementPendingEvents}
+        onDecrementPendingEvents={handleDecrementPendingEvents}
       />
       <ThemeMode />
       <ErrorBox onHideError={handleHideError} >

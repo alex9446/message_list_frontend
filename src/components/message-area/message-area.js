@@ -16,6 +16,11 @@ export default function MessageArea(props) {
 
   useEffect(() => fetch_messages(setMessages), [lastAction]);
 
+  function handle_push_event(event) {
+    props.onIncrementPendingEvents();
+    push_event(event, props.onAddError, props.onDecrementPendingEvents);
+  }
+
   function handleAdd(text) {
     setMessages(messages.concat([{
       key: nextKey(messages),
@@ -24,7 +29,7 @@ export default function MessageArea(props) {
     }]));
 
     const event = {type: 'add', try: 1, data: {text: text}};
-    push_event(event, props.onAddError);
+    handle_push_event(event);
   }
 
   function handleEdit(key, text) {
@@ -35,6 +40,7 @@ export default function MessageArea(props) {
         } else {
           delete message.edit;
           message.text = text;
+          message.preview = true;
         }
       }
       return message;
@@ -42,7 +48,7 @@ export default function MessageArea(props) {
 
     if (text !== null) {
       const event = {type: 'edit', try: 1, data: {remote_id: key, text: text}};
-      push_event(event, props.onAddError);
+      handle_push_event(event);
     }
   }
 
@@ -50,7 +56,7 @@ export default function MessageArea(props) {
     setMessages(messages.filter(message => message.key !== key));
 
     const event = {type: 'delete', try: 1, data: {remote_id: key}};
-    push_event(event, props.onAddError);
+    handle_push_event(event);
   }
 
   return (

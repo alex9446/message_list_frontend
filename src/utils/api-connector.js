@@ -47,7 +47,7 @@ export function fetch_messages(resolve_callback) {
   }).catch(error => handleError(error));
 }
 
-export function push_event(event, onError) {
+export function push_event(event, onError, onComplete) {
   let response;
 
   switch (event.type) {
@@ -69,19 +69,21 @@ export function push_event(event, onError) {
   if (response) {
     response.then(() => {
       console.debug(`Event ${event.type} complete!`);
-    }).catch(() => {
-      const retry = event.try < 3 ? true : false;
+      onComplete();
+    }).catch(error => {
+      const retry = event.try < 6 ? true : false;
       const retry_timing = getRetryTiming();
       const error_callback = event.try === 1 ? onError : null;
 
       handleError(`Event ${event.type} fail! ` +
                   `Retry in ${retry_timing/1000} seconds`,
                   error_callback);
+      console.debug(error);
 
       if (retry) {
         const new_event = { ...event, try: event.try+1 }
 
-        setTimeout(() => push_event(new_event, onError), retry_timing);
+        setTimeout(() => push_event(new_event, onError, onComplete), retry_timing);
       }
     });
   }

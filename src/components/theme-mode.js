@@ -3,8 +3,16 @@ import Icon from '@mdi/react';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
+function getDefaultDarkMode() {
+  let darkMode = null;
+  if (typeof localStorage !== 'undefined' && localStorage.getItem('darkMode') !== null) {
+    darkMode = localStorage.getItem('darkMode') === '1' ? true : false;
+  }
+  return darkMode;
+}
+
 export default function ThemeMode() {
-  const [darkMode, setDarkMode] = useState(null);
+  const [darkMode, setDarkMode] = useState(getDefaultDarkMode);
 
   function getMode() {
     if (darkMode === null) return 'no-mode';
@@ -13,7 +21,10 @@ export default function ThemeMode() {
   }
 
   function handleClick() {
-    setDarkMode(!darkMode);
+    const invertedDarkMode = !darkMode;
+
+    setDarkMode(invertedDarkMode);
+    localStorage.setItem('darkMode', invertedDarkMode ? '1' : '0');
   }
 
   return (

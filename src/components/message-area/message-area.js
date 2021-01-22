@@ -7,7 +7,11 @@ import { nextKey } from '../../utils/next-id-key';
 
 export default function MessageArea(props) {
   const [lastAction, setLastAction] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{
+    key: -1,
+    text: 'Loading...',
+    preview: true
+  }]);
 
   useEffect(() => {
     const interval = setInterval(() => fetch_last_action(setLastAction), getSyncTiming());

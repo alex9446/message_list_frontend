@@ -4,10 +4,12 @@
   --light-mode-button-bg-color: black;
   --light-mode-color: black;
   --light-mode-color-green: darkgreen;
+  --light-mode-preview-color: lightgray;
   --dark-mode-bg-color: #0d1117;
   --dark-mode-button-bg-color: #6e40c9;
   --dark-mode-color: lightgray;
   --dark-mode-color-green: green;
+  --dark-mode-preview-color: #444;
 }
 
 body {  /* DEFAULT: light-mode */
@@ -15,6 +17,7 @@ body {  /* DEFAULT: light-mode */
   --theme-mode-button-bg-color: var(--light-mode-button-bg-color);
   --theme-mode-color: var(--light-mode-color);
   --theme-mode-color-green: var(--light-mode-color-green);
+  --theme-mode-preview-color: var(--light-mode-preview-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +26,7 @@ body {  /* DEFAULT: light-mode */
     --theme-mode-button-bg-color: var(--dark-mode-button-bg-color);
     --theme-mode-color: var(--dark-mode-color);
     --theme-mode-color-green: var(--dark-mode-color-green);
+    --theme-mode-preview-color: var(--dark-mode-preview-color);
   }
 }
 
@@ -31,6 +35,7 @@ body.dark-mode {
   --theme-mode-button-bg-color: var(--dark-mode-button-bg-color);
   --theme-mode-color: var(--dark-mode-color);
   --theme-mode-color-green: var(--dark-mode-color-green);
+  --theme-mode-preview-color: var(--dark-mode-preview-color);
 }
 /* END: setting variables */
 
@@ -127,7 +132,7 @@ p {
 }
 
 .message.preview > svg {
-  color: lightgray;
+  color: var(--theme-mode-preview-color);
   cursor: not-allowed;
 }
 

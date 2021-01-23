@@ -8,8 +8,8 @@ export function getRetryTiming() {
 export default function apiConnector(endpoint, method='GET', json={}) {
   return new Promise((resolve, reject) => {
     const cors_url = process.env.GATSBY_USE_CORS === 'TRUE' ? 'https://cors-anywhere.herokuapp.com/' : '';
-    const protocol = 'https://';
-    const host = process.env.GATSBY_API_HOST || 'localhost';
+    const host = process.env.GATSBY_API_HOST || '';
+    const protocol = process.env.GATSBY_API_PROTOCOL || host === '' ? '' : 'https://';
     const headers = { 'Content-Type': 'application/json' };
 
     const url = cors_url + protocol + host + endpoint;
